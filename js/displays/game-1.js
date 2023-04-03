@@ -1,8 +1,8 @@
 import getElement from "../utils/get-element.js";
 import showDisplay from "../utils/changing-displays.js";
-import gameDisplay_2 from "./game-2.js";
+import gameDisplay2 from "./game-2.js";
 
-const gameDisplay_1 = getElement(`
+const gameDisplay1 = getElement(`
 <header class="header">
     <div class="header__back">
       <span class="back">
@@ -70,16 +70,16 @@ const gameDisplay_1 = getElement(`
   </footer>
 `);
 
-const form = document.querySelector('.game__content');
-const formInputs = form.querySelectorAll('input');
+const form = document.querySelector(`.game__content`);
+const formInputs = form.querySelectorAll(`input`);
 formInputs.forEach((i) => {
-  i.addEventListener('change', function(){
+  i.addEventListener(`change`, function () {
     if ((formInputs[0].checked || formInputs[1].checked) &&
-        (formInputs[2].checked || formInputs[3].checked)) {
-          showDisplay(gameDisplay_2);
-        };
+      (formInputs[2].checked || formInputs[3].checked)) {
+      showDisplay(gameDisplay2);
+    }
   });
 });
 
 
-export default gameDisplay_1;
+export default gameDisplay1;

@@ -1,11 +1,11 @@
 
 import introDisplay from '../blocks/intro.js';
 
-const showDisplay = function(display) {
+const showDisplay = function (display) {
   const mainBlock = document.querySelector(`#main`);
-  const backToMainButton = display.querySelector('.back');
+  const backToMainButton = display.querySelector(`.back`);
 
-  mainBlock.innerHTML = '';
+  mainBlock.innerHTML = ``;
   mainBlock.appendChild(display);
 
   if (backToMainButton) {

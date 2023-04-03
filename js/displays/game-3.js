@@ -3,7 +3,7 @@ import showDisplay from "../utils/changing-displays.js";
 import stats from "./stats.js";
 
 
-const gameDisplay_3 = getElement(`
+const gameDisplay3 = getElement(`
 <header class="header">
 <div class="header__back">
   <span class="back">
@@ -58,8 +58,8 @@ const gameDisplay_3 = getElement(`
 </footer>
 `);
 
-document.querySelectorAll('.game__option').forEach((option) => {
-  option.addEventListener('click', showDisplay(stats));
+document.querySelectorAll(`.game__option`).forEach((option) => {
+  option.addEventListener(`click`, showDisplay(stats));
 });
 
-export default gameDisplay_3;
+export default gameDisplay3;

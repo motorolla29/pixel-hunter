@@ -1,8 +1,8 @@
 import getElement from "../utils/get-element.js";
 import showDisplay from "../utils/changing-displays.js";
-import gameDisplay_3 from "./game-3.js";
+import gameDisplay3 from "./game-3.js";
 
-const gameDisplay_2 = getElement(`
+const gameDisplay2 = getElement(`
 <header class="header">
 <div class="header__back">
   <span class="back">
@@ -59,10 +59,10 @@ const gameDisplay_2 = getElement(`
 </footer>
 `);
 
-document.querySelectorAll('.game__answer input').forEach((i) => {
-  i.addEventListener('change', function() {
-    showDisplay(gameDisplay_3);
+document.querySelectorAll(`.game__answer input`).forEach((i) => {
+  i.addEventListener(`change`, function () {
+    showDisplay(gameDisplay3);
   });
 });
 
-export default gameDisplay_2;
+export default gameDisplay2;

@@ -1,5 +1,5 @@
-const getElement = function(HtmlString) {
-  const element = document.createElement('div');
+const getElement = function (HtmlString) {
+  const element = document.createElement(`div`);
   element.innerHTML = HtmlString;
   return element;
 };

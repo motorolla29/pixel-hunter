@@ -28,7 +28,7 @@ const greetingDisplay = getElement(`
   </footer>
 `);
 
-document.querySelector('.greeting__continue').addEventListener('click', function() {
+document.querySelector(`.greeting__continue`).addEventListener(`click`, function () {
   showDisplay(rulesDisplay);
 });
 

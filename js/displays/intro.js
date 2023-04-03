@@ -9,7 +9,7 @@ const introDisplay = getElement(`
 </div>
 `);
 
-document.querySelector('.intro__asterisk').addEventListener('click', function() {
+document.querySelector(`.intro__asterisk`).addEventListener(`click`, function () {
   showDisplay(greetingDisplay);
 });
 

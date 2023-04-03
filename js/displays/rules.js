@@ -1,6 +1,6 @@
 import getElement from "../utils/get-element.js";
 import showDisplay from "../utils/changing-displays.js";
-import gameDisplay_1 from "./game-1.js";
+import gameDisplay1 from "./game-1.js";
 
 const rulesDisplay = getElement(`
 <header class="header">
@@ -38,22 +38,22 @@ const rulesDisplay = getElement(`
     </div>
   </footer>
 `);
-const form = document.querySelector('.rules__form');
-const nameField = document.querySelector('.rules__input');
-const submitButton = document.querySelector('.rules__button');
+const form = document.querySelector(`.rules__form`);
+const nameField = document.querySelector(`.rules__input`);
+const submitButton = document.querySelector(`.rules__button`);
 
-form.addEventListener('change', function() {
+form.addEventListener(`change`, function () {
   if (nameField.value < 1) {
-    submitButton.removeAttribute('disabled');
+    submitButton.removeAttribute(`disabled`);
   }
   if (nameField.value >= 1) {
-    submitButton.setAttribute('disabled');
+    submitButton.setAttribute(`disabled`);
   }
 });
 
-form.addEventListener('submit', function(e) {
+form.addEventListener(`submit`, function (e) {
   e.preventDefault();
-  showDisplay(gameDisplay_1);
+  showDisplay(gameDisplay1);
 });
 
 export default rulesDisplay;
