@@ -1,37 +1,39 @@
-import getElement from "../utils/get-element.js";
-import showDisplay from "../utils/changing-displays.js";
-import stats from "./stats.js";
+import getElement from '../utils/get-element.js';
+import showDisplay from '../utils/changing-displays.js';
+import stats from './stats.js';
 
 
 const gameDisplay3 = getElement(`
 <header class="header">
-<div class="header__back">
-  <span class="back">
-    <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-    <img src="img/logo_small.png" width="101" height="44">
-  </span>
-</div>
-<h1 class="game__timer">NN</h1>
-<div class="game__lives">
-  <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
-  <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-  <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-</div>
+  <button class="back">
+    <span class="visually-hidden">Вернуться к началу</span>
+    <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
+      <use xlink:href="img/sprite.svg#arrow-left"></use>
+    </svg>
+    <svg class="icon" width="101" height="44" viewBox="0 0 101 44" fill="#000000">
+      <use xlink:href="img/sprite.svg#logo-small"></use>
+    </svg>
+  </button>
+  <div class="game__timer">NN</div>
+  <div class="game__lives">
+    <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="31" height="27">
+    <img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">
+    <img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">
+  </div>
 </header>
-<div class="game">
-<p class="game__task">Найдите рисунок среди изображений</p>
-<form class="game__content  game__content--triple">
-  <div class="game__option">
-    <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-  </div>
-  <div class="game__option  game__option--selected">
-    <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-  </div>
-  <div class="game__option">
-    <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-  </div>
-</form>
-<div class="stats">
+<section class="game">
+  <p class="game__task">Найдите рисунок среди изображений</p>
+  <form class="game__content  game__content--triple">
+    <div class="game__option">
+      <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
+    </div>
+    <div class="game__option  game__option--selected">
+      <img src="http://placehold.it/304x455" alt="Option 2" width="304" height="455">
+    </div>
+    <div class="game__option">
+      <img src="http://placehold.it/304x455" alt="Option 3" width="304" height="455">
+    </div>
+  </form>
   <ul class="stats">
     <li class="stats__result stats__result--wrong"></li>
     <li class="stats__result stats__result--slow"></li>
@@ -44,22 +46,13 @@ const gameDisplay3 = getElement(`
     <li class="stats__result stats__result--fast"></li>
     <li class="stats__result stats__result--unknown"></li>
   </ul>
-</div>
-</div>
-<footer class="footer">
-<a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-<span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-<div class="footer__social-links">
-  <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-  <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-  <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-  <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-</div>
-</footer>
+</section>
 `);
 
-document.querySelectorAll(`.game__option`).forEach((option) => {
-  option.addEventListener(`click`, showDisplay(stats));
+gameDisplay3.querySelectorAll(`.game__option`).forEach((option) => {
+  option.addEventListener(`click`, () => {
+    showDisplay(stats);
+  });
 });
 
 export default gameDisplay3;

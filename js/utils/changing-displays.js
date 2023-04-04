@@ -1,7 +1,7 @@
 
-import introDisplay from '../blocks/intro.js';
+import introDisplay from '../displays/intro.js';
 
-const showDisplay = function (display) {
+const showDisplay = (display) => {
   const mainBlock = document.querySelector(`#main`);
   const backToMainButton = display.querySelector(`.back`);
 

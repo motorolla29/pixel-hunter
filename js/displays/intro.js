@@ -1,15 +1,15 @@
-import getElement from "../utils/get-element.js";
-import showDisplay from "../utils/changing-displays.js";
-import greetingDisplay from "./greeting.js";
+import getElement from '../utils/get-element.js';
+import showDisplay from '../utils/changing-displays.js';
+import greetingDisplay from './greeting.js';
 
 const introDisplay = getElement(`
-<div id="intro" class="intro">
-  <h1 class="intro__asterisk">*</h1>
+<section class="intro">
+  <button class="intro__asterisk asterisk" type="button"><span class="visually-hidden">Продолжить</span>*</button>
   <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
-</div>
+</section>
 `);
 
-document.querySelector(`.intro__asterisk`).addEventListener(`click`, function () {
+introDisplay.querySelector(`.asterisk`).addEventListener(`click`, () => {
   showDisplay(greetingDisplay);
 });
 

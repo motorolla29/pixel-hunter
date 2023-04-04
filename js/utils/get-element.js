@@ -1,4 +1,4 @@
-const getElement = function (HtmlString) {
+const getElement = (HtmlString) => {
   const element = document.createElement(`div`);
   element.innerHTML = HtmlString;
   return element;
