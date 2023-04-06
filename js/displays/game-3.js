@@ -1,9 +1,9 @@
-import getElement from '../utils/get-element.js';
-import showDisplay from '../utils/changing-displays.js';
+import createDisplay from '../utils/createDisplay.js';
+import appendDisplay from '../utils/appendDisplay.js';
 import stats from './stats.js';
 
 
-const gameDisplay3 = getElement(`
+const gameDisplay3 = createDisplay(`
 <header class="header">
   <button class="back">
     <span class="visually-hidden">Вернуться к началу</span>
@@ -51,7 +51,7 @@ const gameDisplay3 = getElement(`
 
 gameDisplay3.querySelectorAll(`.game__option`).forEach((option) => {
   option.addEventListener(`click`, () => {
-    showDisplay(stats);
+    appendDisplay(stats);
   });
 });
 

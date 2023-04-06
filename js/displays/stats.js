@@ -1,6 +1,6 @@
-import getElement from '../utils/get-element.js';
+import createDisplay from '../utils/createDisplay.js';
 
-const statsDisplay = getElement(`
+const statsDisplay = createDisplay(`
 <header class="header">
   <button class="back">
     <span class="visually-hidden">Вернуться к началу</span>

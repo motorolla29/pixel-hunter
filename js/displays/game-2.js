@@ -1,8 +1,8 @@
-import getElement from '../utils/get-element.js';
-import showDisplay from '../utils/changing-displays.js';
+import createDisplay from '../utils/createDisplay.js';
+import appendDisplay from '../utils/appendDisplay.js';
 import gameDisplay3 from './game-3.js';
 
-const gameDisplay2 = getElement(`
+const gameDisplay2 = createDisplay(`
 <header class="header">
   <button class="back">
     <span class="visually-hidden">Вернуться к началу</span>
@@ -52,7 +52,7 @@ const gameDisplay2 = getElement(`
 
 gameDisplay2.querySelectorAll(`.game__answer input`).forEach((i) => {
   i.addEventListener(`input`, function () {
-    showDisplay(gameDisplay3);
+    appendDisplay(gameDisplay3);
   });
 });
 

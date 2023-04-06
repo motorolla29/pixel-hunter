@@ -1,5 +1,5 @@
-import showDisplay from './utils/changing-displays.js';
+import appendDisplay from './utils/appendDisplay.js';
 import introDisplay from './displays/intro.js';
 
 
-showDisplay(introDisplay);
+appendDisplay(introDisplay);

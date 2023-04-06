@@ -1,8 +1,8 @@
-import getElement from '../utils/get-element.js';
-import showDisplay from '../utils/changing-displays.js';
+import createDisplay from '../utils/createDisplay.js';
+import appendDisplay from '../utils/appendDisplay.js';
 import gameDisplay1 from './game-1.js';
 
-const rulesDisplay = getElement(`
+const rulesDisplay = createDisplay(`
 <header class="header">
   <button class="back">
     <span class="visually-hidden">Вернуться к началу</span>
@@ -45,7 +45,7 @@ nameField.addEventListener(`input`, () => {
 });
 
 form.addEventListener(`submit`, function () {
-  showDisplay(gameDisplay1);
+  appendDisplay(gameDisplay1);
 });
 
 export default rulesDisplay;

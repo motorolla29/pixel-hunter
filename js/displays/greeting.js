@@ -1,8 +1,8 @@
-import getElement from '../utils/get-element.js';
-import showDisplay from '../utils/changing-displays.js';
+import createDisplay from '../utils/createDisplay.js';
+import appendDisplay from '../utils/appendDisplay.js';
 import rulesDisplay from './rules.js';
 
-const greetingDisplay = getElement(`
+const greetingDisplay = createDisplay(`
 <section class="greeting central--blur">
   <img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
   <div class="greeting__asterisk asterisk"><span class="visually-hidden">Я просто красивая звёздочка</span>*</div>
@@ -26,7 +26,7 @@ const greetingDisplay = getElement(`
 `);
 
 greetingDisplay.querySelector(`.greeting__continue`).addEventListener(`click`, function () {
-  showDisplay(rulesDisplay);
+  appendDisplay(rulesDisplay);
 });
 
 export default greetingDisplay;

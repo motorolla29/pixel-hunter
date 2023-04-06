@@ -1,8 +1,8 @@
-import getElement from '../utils/get-element.js';
-import showDisplay from '../utils/changing-displays.js';
+import createDisplay from '../utils/createDisplay.js';
+import appendDisplay from '../utils/appendDisplay.js';
 import gameDisplay2 from './game-2.js';
 
-const gameDisplay1 = getElement(`
+const gameDisplay1 = createDisplay(`
 <header class="header">
   <button class="back">
     <span class="visually-hidden">Вернуться к началу</span>
@@ -66,7 +66,7 @@ answers.forEach((item) => {
   item.addEventListener(`input`, function () {
     if ((answers[0].checked || answers[1].checked) &&
       (answers[2].checked || answers[3].checked)) {
-      showDisplay(gameDisplay2);
+      appendDisplay(gameDisplay2);
     }
   });
 });
