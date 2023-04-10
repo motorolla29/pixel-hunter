@@ -1,18 +1,19 @@
 import createDisplay from '../utils/createDisplay.js';
 import appendDisplay from '../utils/appendDisplay.js';
-import greetingDisplay from './greeting.js';
+import greetingNode from './greeting.js';
 
 const introDisplayDescription = `Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.`;
 
-const introDisplay = createDisplay(`
+const introTemplate = `
 <section class="intro">
   <button class="intro__asterisk asterisk" type="button"><span class="visually-hidden">Продолжить</span>*</button>
   <p class="intro__motto"><sup>*</sup>${introDisplayDescription}</p>
 </section>
-`);
+`;
+const introNode = createDisplay(introTemplate);
 
-introDisplay.querySelector(`.asterisk`).addEventListener(`click`, () => {
-  appendDisplay(greetingDisplay);
+introNode.querySelector(`.asterisk`).addEventListener(`click`, () => {
+  appendDisplay(greetingNode);
 });
 
-export default introDisplay;
+export default introNode;

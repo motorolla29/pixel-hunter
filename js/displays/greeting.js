@@ -1,6 +1,6 @@
 import createDisplay from '../utils/createDisplay.js';
 import appendDisplay from '../utils/appendDisplay.js';
-import rulesDisplay from './rules.js';
+import rulesNode from './rules.js';
 
 const greetingDisplayData = {
   title: `Лучшие художники-фотореалисты бросают тебе вызов!`,
@@ -13,7 +13,7 @@ const greetingDisplayData = {
   ]
 };
 
-const greetingDisplay = createDisplay(`
+const greetingTemplate = `
 <section class="greeting central--blur">
   <img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
   <div class="greeting__asterisk asterisk"><span class="visually-hidden">Я просто красивая звёздочка</span>*</div>
@@ -31,10 +31,12 @@ const greetingDisplay = createDisplay(`
     </svg>
   </button>
 </section>
-`);
+`;
 
-greetingDisplay.querySelector(`.greeting__continue`).addEventListener(`click`, function () {
-  appendDisplay(rulesDisplay);
+const greetingNode = createDisplay(greetingTemplate);
+
+greetingNode.querySelector(`.greeting__continue`).addEventListener(`click`, function () {
+  appendDisplay(rulesNode);
 });
 
-export default greetingDisplay;
+export default greetingNode;

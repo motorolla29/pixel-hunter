@@ -1,8 +1,9 @@
 import createDisplay from '../utils/createDisplay.js';
-import getHeader from './getHeader.js';
+import getHeader from '../utils/getHeader.js';
 import {INITIAL_GAME} from '../utils/changeLevel.js';
+import statsListItems from '../utils/getStatsListItems.js';
 
-const statsDisplay = createDisplay(`
+const statsTemplate = `
 ${getHeader(INITIAL_GAME)}
 <section class="result">
   <h2 class="result__title">Победа!</h2>
@@ -11,16 +12,7 @@ ${getHeader(INITIAL_GAME)}
       <td class="result__number">1.</td>
       <td colspan="2">
         <ul class="stats">
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--correct"></li>
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--unknown"></li>
+          ${statsListItems}
         </ul>
       </td>
       <td class="result__points">× 100</td>
@@ -104,6 +96,8 @@ ${getHeader(INITIAL_GAME)}
     </tr>
   </table>
 </section>
-`);
+`;
 
-export default statsDisplay;
+const statsNode = createDisplay(statsTemplate);
+
+export default statsNode;
