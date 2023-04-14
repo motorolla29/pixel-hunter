@@ -1,19 +1,25 @@
-import createDisplay from '../utils/create-display.js';
-import appendDisplay from '../utils/append-display.js';
-import greetingNode from './greeting.js';
+import AbstractView from './abstract-view.js';
 
-const introDisplayDescription = `Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.`;
+export default class IntroDisplay extends AbstractView {
+  constructor() {
+    super();
+  }
 
-const introTemplate = `
-<section class="intro">
-  <button class="intro__asterisk asterisk" type="button"><span class="visually-hidden">Продолжить</span>*</button>
-  <p class="intro__motto"><sup>*</sup>${introDisplayDescription}</p>
-</section>
-`;
-const introNode = createDisplay(introTemplate);
+  get template() {
+    return `
+    <section class="intro">
+      <button class="intro__asterisk asterisk" type="button"><span class="visually-hidden">Продолжить</span>*</button>
+      <p class="intro__motto"><sup>*</sup>Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
+    </section>`;
+  }
 
-introNode.querySelector(`.asterisk`).addEventListener(`click`, () => {
-  appendDisplay(greetingNode);
-});
+  onClick() {
+  }
 
-export default introNode;
+  bind() {
+    this.element.querySelector(`.intro__asterisk`).addEventListener(`click`, () => {
+      this.onClick();
+    });
+  }
+}
+

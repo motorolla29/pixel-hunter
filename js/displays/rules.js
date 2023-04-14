@@ -1,55 +1,50 @@
-import createDisplay from '../utils/create-display.js';
-import appendDisplay from '../utils/append-display.js';
-import {GAME_DATA} from '../data/game-data.js';
-import {renderGameDisplay} from '../utils/render-game-display.js';
+import AbstractView from './abstract-view.js';
 
-const rulesIcons = {
-  paint: `<img class="rules__icon" src="img/icon-paint.png" width="32" height="31" alt="Рисунок"></img>`,
-  photo: `<img class="rules__icon" src="img/icon-photo.png" width="32" height="31" alt="Фото">`
-};
-
-const rulesDescriptions = [
-  `Угадай 10 раз для каждого изображения фото ${rulesIcons
-    .photo} или рисунок ${rulesIcons
-    .paint}`,
-  `Фотографиями или рисунками могут быть оба изображения.`,
-  `На каждую попытку отводится 30 секунд.`,
-  `Ошибиться можно не более 3 раз.`
-];
-
-
-const rulesTemplate = `
-<section class="rules">
-  <h2 class="rules__title">Правила</h2>
-  <ul class="rules__description">
-  ${rulesDescriptions.map((it) => `<li>${it}</li>`).join(``)}
-  </ul>
-  <p class="rules__ready">Готовы?</p>
-  <form class="rules__form">
-    <input class="rules__input" type="text" placeholder="Ваше Имя">
-    <button class="rules__button  continue" type="submit" disabled>Go!</button>
-  </form>
-</section>
-`;
-
-const rulesNode = createDisplay(rulesTemplate);
-
-const form = rulesNode.querySelector(`.rules__form`);
-const nameField = rulesNode.querySelector(`.rules__input`);
-const submitButton = rulesNode.querySelector(`.rules__button`);
-
-nameField.addEventListener(`input`, () => {
-  if (nameField.value !== ``) {
-    submitButton.removeAttribute(`disabled`);
-  } else {
-    submitButton.setAttribute(`disabled`, `disabled`);
+export default class RulesDisplay extends AbstractView {
+  constructor() {
+    super();
   }
-});
 
-form.addEventListener(`submit`, function (evt) {
-  evt.preventDefault();
-  form.reset();
-  appendDisplay(renderGameDisplay(GAME_DATA[0]));
-});
+  get template() {
+    return `
+    <section class="rules">
+      <h2 class="rules__title">Правила</h2>
+      <ul class="rules__description">
+        <li>Угадай 10 раз для каждого изображения фото
+          <img class="rules__icon" src="img/icon-photo.png" width="32" height="31" alt="Фото"> или рисунок
+          <img class="rules__icon" src="img/icon-paint.png" width="32" height="31" alt="Рисунок"></li>
+        <li>Фотографиями или рисунками могут быть оба изображения.</li>
+        <li>На каждую попытку отводится 30 секунд.</li>
+        <li>Ошибиться можно не более 3 раз.</li>
+      </ul>
+      <p class="rules__ready">Готовы?</p>
+      <form class="rules__form">
+        <input class="rules__input" type="text" placeholder="Ваше Имя">
+        <button class="rules__button  continue" type="submit" disabled>Go!</button>
+      </form>
+    </section>`;
+  }
 
-export default rulesNode;
+  onSubmit() {
+  }
+
+  bind() {
+    const form = this.element.querySelector(`.rules__form`);
+    const nameField = this.element.querySelector(`.rules__input`);
+    const submitButton = this.element.querySelector(`.rules__button`);
+
+    nameField.addEventListener(`input`, () => {
+      if (nameField.value !== ``) {
+        submitButton.removeAttribute(`disabled`);
+      } else {
+        submitButton.setAttribute(`disabled`, `disabled`);
+      }
+    });
+
+    form.addEventListener(`submit`, () => {
+      form.reset();
+      this.onSubmit();
+    });
+  }
+}
+

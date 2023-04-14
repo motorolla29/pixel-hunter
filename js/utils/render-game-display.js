@@ -56,7 +56,6 @@ const renderGameDisplay = (data) => {
 
 
   const renderNextDisplay = () => {
-    console.log(currentGame);
     let currentStatsIcons = getStatsIcons(currentGame.statistics);
 
     if (currentGame.lives <= 0) {

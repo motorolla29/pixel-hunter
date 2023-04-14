@@ -1,5 +1,6 @@
 import appendDisplay from './utils/append-display.js';
-import introDisplay from './displays/intro.js';
+import IntroDisplay from './displays/intro.js';
 
+const intro = new IntroDisplay();
 
-appendDisplay(introDisplay);
+appendDisplay(intro.element);
