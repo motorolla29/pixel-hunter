@@ -12,14 +12,14 @@ const getFinalScore = function (answersArray, livesLeft) {
     return -1;
   }
 
-  answersArray.forEach((item) => {
-    if (item.answerIsTrue) {
+  answersArray.forEach((answer) => {
+    if (answer.isCorrect) {
       score += scoreMap.RIGHT_ANSWER;
     }
-    if (item.answerTime < 10) {
+    if (answer.answerTime < 10) {
       score += scoreMap.FAST_ANSWER;
     }
-    if (item.answerTime > 20) {
+    if (answer.answerTime > 20) {
       score += scoreMap.SLOW_ANSWER;
     }
   });

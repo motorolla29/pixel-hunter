@@ -1,5 +1,5 @@
 import {assert} from "chai";
-import GameTimer from "../utils/gameTimer.js";
+import GameTimer from "../utils/game-timer.js";
 
 const callback = () => {
   return `done`;

@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import getFinalScore from '../utils/getFinalScore';
+import getFinalScore from '../utils/get-final-score';
 
 const createAnswersArray = function (questionsQuantity, truthfulness = true, time = 15) {
   const answersArray = [];

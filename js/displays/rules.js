@@ -1,7 +1,7 @@
-import createDisplay from '../utils/createDisplay.js';
-import appendDisplay from '../utils/appendDisplay.js';
-import GAME_DATA from '../data/game-data.js';
-import renderGameDisplay from '../utils/renderGameDisplay.js';
+import createDisplay from '../utils/create-display.js';
+import appendDisplay from '../utils/append-display.js';
+import {GAME_DATA} from '../data/game-data.js';
+import {renderGameDisplay} from '../utils/render-game-display.js';
 
 const rulesIcons = {
   paint: `<img class="rules__icon" src="img/icon-paint.png" width="32" height="31" alt="Рисунок"></img>`,

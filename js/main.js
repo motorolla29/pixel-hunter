@@ -1,4 +1,4 @@
-import appendDisplay from './utils/appendDisplay.js';
+import appendDisplay from './utils/append-display.js';
 import introDisplay from './displays/intro.js';
 
 

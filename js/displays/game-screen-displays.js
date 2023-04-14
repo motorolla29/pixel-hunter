@@ -1,8 +1,9 @@
-import getHeader from '../utils/getHeader.js';
-import {INITIAL_GAME} from '../utils/changeLevel.js';
+import getHeader from '../utils/get-header.js';
+import {currentGame} from '../utils/change-level.js';
+import {getStatsIcons} from '../utils/get-stats-icons.js';
 
 const firstGameTemplate = (data) => `
-${getHeader(INITIAL_GAME)}
+${getHeader(currentGame)}
 <section class="game">
   <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
   <form class="game__content">
@@ -30,13 +31,13 @@ ${getHeader(INITIAL_GAME)}
     </div>
   </form>
   <ul class="stats">
-    ${INITIAL_GAME.statistics.join(``)}
+    ${getStatsIcons(currentGame.statistics).join(``)}
   </ul>
 </section>
 `;
 
 const secondGameTemplate = (data) => `
-${getHeader(INITIAL_GAME)}
+${getHeader(currentGame)}
 <section class="game">
   <p class="game__task">${data.task}</p>
   <form class="game__content  game__content--wide">
@@ -53,13 +54,13 @@ ${getHeader(INITIAL_GAME)}
   </div>
   </form>
   <ul class="stats">
-    ${INITIAL_GAME.statistics.join(``)}
+    ${getStatsIcons(currentGame.statistics).join(``)}
   </ul>
 </section>
 `;
 
 const thirdGameTemplate = (data) => `
-${getHeader(INITIAL_GAME)}
+${getHeader(currentGame)}
 <section class="game">
   <p class="game__task">Найдите рисунок среди изображений</p>
   <form class="game__content  game__content--triple">
@@ -74,7 +75,7 @@ ${getHeader(INITIAL_GAME)}
     </div>
   </form>
   <ul class="stats">
-    ${INITIAL_GAME.statistics.join(``)}
+    ${getStatsIcons(currentGame.statistics).join(``)}
   </ul>
 </section>
 `;

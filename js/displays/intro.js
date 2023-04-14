@@ -1,5 +1,5 @@
-import createDisplay from '../utils/createDisplay.js';
-import appendDisplay from '../utils/appendDisplay.js';
+import createDisplay from '../utils/create-display.js';
+import appendDisplay from '../utils/append-display.js';
 import greetingNode from './greeting.js';
 
 const introDisplayDescription = `Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.`;

@@ -1,14 +1,17 @@
-import GameTimer from './gameTimer.js';
-import statsListItems from './getStatsListItems.js';
+import GameTimer from './game-timer.js';
+import {STATS_DATA} from '../data/game-data.js';
 
 let timer = new GameTimer(30000); // На ответ игроку дается 30 сек
-const INITIAL_GAME = {
+
+const INITIAL_GAME = Object.freeze({
   level: 0,
   lives: 3,
   time: timer.time,
   answers: [],
-  statistics: statsListItems
-};
+  statistics: STATS_DATA
+});
+
+let currentGame = Object.assign({}, INITIAL_GAME);
 
 const changeLevel = (game, level) => {
   if (typeof level !== `number`) {
@@ -23,4 +26,4 @@ const changeLevel = (game, level) => {
   return newGame;
 };
 
-export {INITIAL_GAME, changeLevel};
+export {INITIAL_GAME, changeLevel, currentGame};
