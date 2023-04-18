@@ -1,6 +1,3 @@
-import appendDisplay from './utils/append-display.js';
-import IntroDisplay from './displays/intro.js';
+import Application from "./controller/application";
 
-const intro = new IntroDisplay();
-
-appendDisplay(intro.element);
+Application.showIntro();

@@ -1,5 +1,5 @@
 import createDisplay from "./create-display";
-import appendDisplay from "./append-display";
+import changeView from "./change-view";
 import {GAME_DATA} from "../data/game-data";
 import statsTemplate from "../displays/stats";
 import {currentGame} from "./change-level";
@@ -60,15 +60,15 @@ const renderGameDisplay = (data) => {
 
     if (currentGame.lives <= 0) {
       const statsFailDisplay = createDisplay(statsTemplate(currentStatsIcons, true));
-      appendDisplay(statsFailDisplay);
+      changeView(statsFailDisplay);
       return;
     }
     if (currentGame.lives > 0 && currentGame.level < GAME_DATA.length - 1) {
       currentGame.level++;
-      appendDisplay(renderGameDisplay(GAME_DATA[currentGame.level]));
+      changeView(renderGameDisplay(GAME_DATA[currentGame.level]));
     } else {
       const statsWinDisplay = createDisplay(statsTemplate(currentStatsIcons));
-      appendDisplay(statsWinDisplay);
+      changeView(statsWinDisplay);
     }
   };
 

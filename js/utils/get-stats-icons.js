@@ -8,7 +8,7 @@ const statsIconTypesMap = {
 
 const getStatsIcons = (data) => {
   const gameStatsArr = [];
-  data.forEach((el) => {
+  data.statistics.forEach((el) => {
     gameStatsArr.push(statsIconTypesMap[el]);
   });
 

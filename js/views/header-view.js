@@ -1,6 +1,7 @@
 import AbstractView from "./abstract-view";
+import Application from "../controller/application";
 
-export default class Header extends AbstractView {
+export default class HeaderView extends AbstractView {
   constructor(initialData, state) {
     super();
     this.initialData = initialData;
@@ -24,9 +25,9 @@ export default class Header extends AbstractView {
       </button>`;
 
     const gameState = `
-    <div class="game__timer">${this.state.time / 1000}</div>
+    <div class="game__timer">${this.state.time}</div>
       <div class="game__lives">
-        ${new Array(this.initialData - this.state.lives).fill(heartEmptyIcon).join(``)}
+        ${new Array(this.initialData.lives - this.state.lives).fill(heartEmptyIcon).join(``)}
         ${new Array(this.state.lives).fill(heartFullIcon).join(``)}
       </div>
     `;
@@ -38,7 +39,6 @@ export default class Header extends AbstractView {
         ${gameState}
       </header>`;
     }
-
     return `
     <header class="header">
       ${returnButton}
@@ -46,7 +46,7 @@ export default class Header extends AbstractView {
   }
 
   onClick() {
-
+    Application.showIntro();
   }
 
   bind() {

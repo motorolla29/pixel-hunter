@@ -1,6 +1,9 @@
 import AbstractView from './abstract-view.js';
+import Application from '../controller/application.js';
 
-export default class RulesDisplay extends AbstractView {
+let playerName;
+
+export default class RulesView extends AbstractView {
   constructor() {
     super();
   }
@@ -26,6 +29,7 @@ export default class RulesDisplay extends AbstractView {
   }
 
   onSubmit() {
+    Application.showGame(playerName);
   }
 
   bind() {
@@ -42,6 +46,7 @@ export default class RulesDisplay extends AbstractView {
     });
 
     form.addEventListener(`submit`, () => {
+      playerName = nameField.value;
       form.reset();
       this.onSubmit();
     });

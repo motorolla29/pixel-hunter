@@ -1,18 +1,16 @@
 import AbstractView from './abstract-view.js';
 
 export default class StatsDisplay extends AbstractView {
-  constructor(currentGame, isFail, statsIconsArray, headerTemplate) {
+  constructor(currentGame, isFail, statsArray) {
     super();
     this.currentGame = currentGame;
-    this.headerTemplate = headerTemplate;
     this.isFail = isFail;
-    this.statsIconsArray = statsIconsArray;
+    this.statsArray = statsArray;
   }
 
   get template() {
     if (this.isFail) {
       return `
-      ${this.headerTemplate}
       <section class="result">
         <h2 class="result__title">Проигрыш</h2>
         <table class="result__table">
@@ -20,7 +18,7 @@ export default class StatsDisplay extends AbstractView {
             <td class="result__number"></td>
             <td>
               <ul class="stats">
-                ${this.statsIconsArray.join(``)}
+                ${this.getStatsIcons(this.statsArray).join(``)}
               </ul>
             </td>
             <td class="result__total"></td>
@@ -30,18 +28,17 @@ export default class StatsDisplay extends AbstractView {
       </section>
       `;
     }
-    const correctAnswers = currentGame.answers.filter((answer) => {
-      return answer.answerIsTrue;
+    const correctAnswers = this.currentGame.answers.filter((answer) => {
+      return answer.isCorrect;
     });
-    const fastAnswers = currentGame.answers.filter((answer) => {
-      return answer.quality === `fast` && answer.answerIsTrue;
+    const fastAnswers = this.currentGame.answers.filter((answer) => {
+      return answer.quality === `fast` && answer.isCorrect;
     });
-    const slowAnswers = currentGame.answers.filter((answer) => {
-      return answer.quality === `slow` && answer.answerIsTrue;
+    const slowAnswers = this.currentGame.answers.filter((answer) => {
+      return answer.quality === `slow` && answer.isCorrect;
     });
 
     return `
-    ${this.headerTemplate}
     <section class="result">
       <h2 class="result__title">Победа!</h2>
       <table class="result__table">
@@ -49,7 +46,7 @@ export default class StatsDisplay extends AbstractView {
           <td class="result__number"></td>
           <td colspan="2">
             <ul class="stats">
-              ${this.statsIconsArray.join(``)}
+              ${this.getStatsIcons(this.statsArray).join(``)}
             </ul>
           </td>
           <td class="result__points">× 100</td>
@@ -118,15 +115,23 @@ export default class StatsDisplay extends AbstractView {
     score += livesLeft * scoreMap.EXTRA_LIVE;
 
     return score;
-
-  };
-
-  onClick() {
-
   }
 
-  bind() {
+  getStatsIcons(data) {
+    const statsIconTypesMap = {
+      right: `<li class="stats__result stats__result--correct"></li>`,
+      wrong: `<li class="stats__result stats__result--wrong"></li>`,
+      fast: `<li class="stats__result stats__result--fast"></li>`,
+      slow: `<li class="stats__result stats__result--slow"></li>`,
+      unknown: `<li class="stats__result stats__result--unknown"></li>`
+    };
 
+    const gameStatsArr = [];
+    data.forEach((el) => {
+      gameStatsArr.push(statsIconTypesMap[el]);
+    });
+
+    return gameStatsArr;
   }
-
 }
+

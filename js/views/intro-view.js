@@ -1,6 +1,7 @@
 import AbstractView from './abstract-view.js';
+import Application from '../controller/application.js';
 
-export default class IntroDisplay extends AbstractView {
+export default class IntroView extends AbstractView {
   constructor() {
     super();
   }
@@ -14,6 +15,7 @@ export default class IntroDisplay extends AbstractView {
   }
 
   onClick() {
+    Application.showGreeting();
   }
 
   bind() {
