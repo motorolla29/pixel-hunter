@@ -11,7 +11,7 @@ export default class GameScreen {
   constructor(model) {
     this.model = model;
     this.screenContainer = document.createElement(`div`);
-    this.ONE_SECOND = 200;
+    this.ONE_SECOND = 1000;
   }
 
   start() {
@@ -80,14 +80,20 @@ export default class GameScreen {
         quality: null
       });
       this.model.currentGame.statistics[this.model.currentGame.level] = `wrong`;
+
+      if (this.model.currentGame.level === GAME_DATA.length - 1 && this.model.currentGame.lives > 0) {
+        this.stopTimer();
+        this.winGame();
+        return;
+      }
+      if (this.model.currentGame.level === GAME_DATA.length - 1 && this.model.currentGame.lives <= 0) {
+        this.stopTimer();
+        this.loseGame();
+        return;
+      }
       GameScreen.changeLevel(this.model.currentGame, this.model.currentGame.level++);
       this.stopTimer();
       this.start();
-    }
-    if (this.model.currentGame.lives <= 0) {
-      this.stopTimer();
-      this.loseGame();
-      return;
     }
     this.model.currentGame.time--;
     this.updateTimeOnHeader();
