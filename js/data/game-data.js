@@ -169,6 +169,4 @@ const GAME_DATA = [
   }
 ];
 
-const STATS_DATA = new Array(GAME_DATA.length).fill(`unknown`);
-
-export {GAME_DATA, STATS_DATA};
+export default GAME_DATA;

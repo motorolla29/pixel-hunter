@@ -1,3 +1,4 @@
+import Utils from '../utils/utils.js';
 import AbstractView from './abstract-view.js';
 
 export default class StatsDisplay extends AbstractView {
@@ -18,7 +19,7 @@ export default class StatsDisplay extends AbstractView {
             <td class="result__number"></td>
             <td>
               <ul class="stats">
-                ${this.getStatsIcons(this.statsArray).join(``)}
+                ${Utils.getStatsIcons(this.statsArray).join(``)}
               </ul>
             </td>
             <td class="result__total"></td>
@@ -46,7 +47,7 @@ export default class StatsDisplay extends AbstractView {
           <td class="result__number"></td>
           <td colspan="2">
             <ul class="stats">
-              ${this.getStatsIcons(this.statsArray).join(``)}
+              ${Utils.getStatsIcons(this.statsArray).join(``)}
             </ul>
           </td>
           <td class="result__points">× 100</td>
@@ -84,9 +85,9 @@ export default class StatsDisplay extends AbstractView {
 
   getFinalScore(answersArray, livesLeft) {
     const scoreMap = {
-      RIGHT_ANSWER: 100,
-      FAST_ANSWER: 50,
-      SLOW_ANSWER: -50,
+      CORRECT_ANSWER: 100,
+      FAST_ANSWER: 150,
+      SLOW_ANSWER: 50,
       EXTRA_LIVE: 50
     };
 
@@ -98,40 +99,21 @@ export default class StatsDisplay extends AbstractView {
 
     answersArray.forEach((answer) => {
       if (answer.isCorrect) {
-        score += scoreMap.RIGHT_ANSWER;
-      }
-      if (answer.answerTime < 10) {
-        score += scoreMap.FAST_ANSWER;
-      }
-      if (answer.answerTime > 20) {
-        score += scoreMap.SLOW_ANSWER;
+        if (answer.quality === `correct`) {
+          score += scoreMap.CORRECT_ANSWER;
+        }
+        if (answer.quality === `slow`) {
+          score += scoreMap.SLOW_ANSWER;
+        }
+        if (answer.quality === `fast`) {
+          score += scoreMap.FAST_ANSWER;
+        }
       }
     });
-
-    if (livesLeft !== 3) {
-      score -= (3 - livesLeft) * 100;
-    }
 
     score += livesLeft * scoreMap.EXTRA_LIVE;
 
     return score;
-  }
-
-  getStatsIcons(data) {
-    const statsIconTypesMap = {
-      right: `<li class="stats__result stats__result--correct"></li>`,
-      wrong: `<li class="stats__result stats__result--wrong"></li>`,
-      fast: `<li class="stats__result stats__result--fast"></li>`,
-      slow: `<li class="stats__result stats__result--slow"></li>`,
-      unknown: `<li class="stats__result stats__result--unknown"></li>`
-    };
-
-    const gameStatsArr = [];
-    data.forEach((el) => {
-      gameStatsArr.push(statsIconTypesMap[el]);
-    });
-
-    return gameStatsArr;
   }
 }
 

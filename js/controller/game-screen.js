@@ -1,9 +1,6 @@
 
-
-import {INITIAL_GAME} from '../utils/change-level';
-import {GAME_DATA} from '../data/game-data';
-import {getStatsIcons} from "../utils/get-stats-icons";
-import changeView from "../utils/change-view";
+import Utils from '../utils/utils';
+import GAME_DATA from '../data/game-data';
 import Application from "../controller/application";
 import HeaderView from "../views/header-view";
 import SingleGameView from "../views/single-game-view";
@@ -14,19 +11,26 @@ export default class GameScreen {
   constructor(model) {
     this.model = model;
     this.screenContainer = document.createElement(`div`);
-    this.ONE_SECOND = 1000;
+    this.ONE_SECOND = 200;
   }
 
   start() {
-    this.startTimer();
-    this.gameTypes = {
-      singleQuestion: new SingleGameView(GAME_DATA[this.model.currentGame.level], getStatsIcons(this.model.currentGame).join(``)),
-      doubleQuestion: new DoubleGameView(GAME_DATA[this.model.currentGame.level], getStatsIcons(this.model.currentGame).join(``)),
-      tripleQuestion: new TripleGameView(GAME_DATA[this.model.currentGame.level], getStatsIcons(this.model.currentGame).join(``))
-    };
+    const header = new HeaderView(this.model._state, this.model.currentGame, this.model, this);
 
-    this.currentGameView = this.gameTypes[GAME_DATA[this.model.currentGame.level].type];
-    const header = new HeaderView(INITIAL_GAME, this.model.currentGame);
+    this.currentGameView = null;
+    switch (GAME_DATA[this.model.currentGame.level].type) {
+      case this.model.GameType.SINGLE_QUESTION:
+        this.currentGameView = new SingleGameView(GAME_DATA[this.model.currentGame.level], Utils.getStatsIcons(this.model.currentGame.statistics).join(``));
+        break;
+      case this.model.GameType.DOUBLE_QUESTION:
+        this.currentGameView = new DoubleGameView(GAME_DATA[this.model.currentGame.level], Utils.getStatsIcons(this.model.currentGame.statistics).join(``));
+        break;
+      case this.model.GameType.TRIPLE_QUESTION:
+        this.currentGameView = new TripleGameView(GAME_DATA[this.model.currentGame.level], Utils.getStatsIcons(this.model.currentGame.statistics).join(``));
+        break;
+    }
+
+    this.startTimer();
 
     this.currentGameView.onAnswer = (evt) => {
       this.model.updateStats(this.currentGameView, evt);
@@ -36,11 +40,11 @@ export default class GameScreen {
         return;
       }
       if (this.model.currentGame.lives > 0 && this.model.currentGame.level < GAME_DATA.length - 1) {
-        this.model.nextLevel();
+        GameScreen.changeLevel(this.model.currentGame, this.model.currentGame.level++);
         this.stopTimer();
         this.start();
       } else {
-        this.model.nextLevel();
+        GameScreen.changeLevel(this.model.currentGame, this.model.currentGame.level++);
         this.stopTimer();
         this.winGame();
       }
@@ -49,7 +53,8 @@ export default class GameScreen {
     this.screenContainer.innerHTML = ``;
     this.screenContainer.appendChild(header.element);
     this.screenContainer.appendChild(this.currentGameView.element);
-    changeView(this.screenContainer);
+    this.headerTimerNode = this.screenContainer.querySelector(`.game__timer`);
+    Utils.changeView(this.screenContainer);
   }
 
   loseGame() {
@@ -63,14 +68,19 @@ export default class GameScreen {
   }
 
   updateTimeOnHeader() {
-    let headerTimerNode = this.screenContainer.querySelector(`.game__timer`);
-    headerTimerNode.innerHTML = this.model.currentGame.time;
+    this.headerTimerNode.innerHTML = this.model.currentGame.time;
   }
 
   tick() {
     if (this.model.currentGame.time <= 0) {
-      this.model.reduceLives();
-      this.model.nextLevel();
+      this.model.currentGame.lives = this.model.reduceLives(this.model.currentGame.lives);
+      this.model.currentGame.answers.push({
+        isCorrect: false,
+        answerTime: null,
+        quality: null
+      });
+      this.model.currentGame.statistics[this.model.currentGame.level] = `wrong`;
+      GameScreen.changeLevel(this.model.currentGame, this.model.currentGame.level++);
       this.stopTimer();
       this.start();
     }
@@ -84,14 +94,26 @@ export default class GameScreen {
   }
 
   startTimer() {
-    this.timer = setTimeout(() => {
+    this.timer = setInterval(() => {
       this.tick();
-      this.startTimer();
     }, this.ONE_SECOND);
   }
 
   stopTimer() {
-    clearTimeout(this.timer);
+    clearInterval(this.timer);
     this.model.currentGame.time = this.model._state.time;
+  }
+
+  static changeLevel(game, level) {
+    if (typeof level !== `number`) {
+      throw new Error(`Level should be of type number`);
+    }
+    if (level < 0) {
+      throw new Error(`Level should not be negative value`);
+    }
+    const newGame = Object.assign({}, game, {
+      level
+    });
+    return newGame;
   }
 }
