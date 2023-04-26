@@ -54,6 +54,7 @@ export default class GameScreen {
     this.screenContainer.appendChild(header.element);
     this.screenContainer.appendChild(this.currentGameView.element);
     this.headerTimerNode = this.screenContainer.querySelector(`.game__timer`);
+    this.currentGameView.resizeImages();
     Utils.changeView(this.screenContainer);
   }
 
@@ -86,7 +87,7 @@ export default class GameScreen {
         this.winGame();
         return;
       }
-      if (this.model.currentGame.level === GAME_DATA.length - 1 && this.model.currentGame.lives <= 0) {
+      if (this.model.currentGame.lives <= 0) {
         this.stopTimer();
         this.loseGame();
         return;

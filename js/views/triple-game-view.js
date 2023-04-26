@@ -1,10 +1,24 @@
 import AbstractView from './abstract-view.js';
+import Utils from '../utils/utils.js';
 
 export default class TripleGameView extends AbstractView {
   constructor(data, statsIcons) {
     super();
     this.data = data;
     this.statsIcons = statsIcons;
+  }
+
+  resizeImages() {
+    const images = this.element.querySelectorAll(`.game__option img`);
+    [...images].forEach((img) => {
+      img.addEventListener(`load`, () => {
+        const newSize = Utils.resizePhoto(
+            {width: img.width, height: img.height},
+            {width: img.naturalWidth, height: img.naturalHeight});
+        img.width = newSize.width;
+        img.height = newSize.height;
+      });
+    });
   }
 
   get template() {
@@ -16,10 +30,10 @@ export default class TripleGameView extends AbstractView {
               <img src=${this.data.options[0].src} alt=${this.data.options[0].alt} width="304" height="455">
             </div>
             <div class="game__option">
-              <img src=${this.data.options[1].src} alt=${this.data.options[1].alt} width="304" height="455">
+              <img src=${this.data.options[1].src}  alt=${this.data.options[1].alt} width="304" height="455">
             </div>
             <div class="game__option">
-              <img src=${this.data.options[2].src} alt=${this.data.options[2].alt} width="304" height="455">
+              <img src=${this.data.options[2].src}  alt=${this.data.options[2].alt} width="304" height="455">
             </div>
           </form>
           <ul class="stats">

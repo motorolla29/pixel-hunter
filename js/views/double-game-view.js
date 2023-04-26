@@ -1,10 +1,24 @@
 import AbstractView from './abstract-view.js';
+import Utils from '../utils/utils.js';
 
 export default class DoubleGameView extends AbstractView {
   constructor(data, statsIcons) {
     super();
     this.data = data;
     this.statsIcons = statsIcons;
+  }
+
+  resizeImages() {
+    const images = this.element.querySelectorAll(`.game__option img`);
+    [...images].forEach((img) => {
+      img.addEventListener(`load`, () => {
+        const newSize = Utils.resizePhoto(
+            {width: img.width, height: img.height},
+            {width: img.naturalWidth, height: img.naturalHeight});
+        img.width = newSize.width;
+        img.height = newSize.height;
+      });
+    });
   }
 
   get template() {
