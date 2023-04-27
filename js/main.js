@@ -1,3 +1,3 @@
 import Application from "./controller/application";
 
-Application.showIntro();
+Application.start();

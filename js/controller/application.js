@@ -5,10 +5,47 @@ import RulesView from '../views/rules-view.js';
 import StatsView from '../views/stats-view.js';
 import GameScreen from './game-screen.js';
 import GameModel from '../model/game-model.js';
+import SplashScreen from '../views/splash-screen.js';
+import ModalErrorView from '../views/modal-error-view.js';
 import Utils from '../utils/utils.js';
+import GAME_DATA from '../data/game-data.js';
 
 const screenContainer = document.createElement(`div`);
+
+const checkStatus = (response) => {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  } else {
+    throw new Error(`${response.status}: ${response.statusText}`);
+  }
+};
+
+export let serverData;
 export default class Application {
+  static start() {
+    const splash = new SplashScreen();
+    Utils.changeView(splash.element);
+    splash.start();
+    window.fetch(`https://es.dump.academy/pixel-hunter/questions`).
+    then(checkStatus).
+    then((response) => response.json()).
+    then((data) => (serverData = data)).
+    then(() => Application.showIntro()).
+    catch((err) => {
+      Application.showModalError(err.message);
+      serverData = GAME_DATA;
+      setTimeout(() => {
+        Application.showIntro();
+      }, 3000);
+    }).
+    then(() => splash.stop());
+  }
+
+  static showModalError(errorStatus) {
+    const modalError = new ModalErrorView(errorStatus);
+    Utils.changeView(modalError.element);
+  }
+
   static showIntro() {
     const intro = new IntroView();
     Utils.changeView(intro.element);
