@@ -1,7 +1,7 @@
 import Utils from '../utils/utils.js';
 import AbstractView from './abstract-view.js';
 
-export default class StatsDisplay extends AbstractView {
+export default class StatsView extends AbstractView {
   constructor(currentGame, isFail, statsArray) {
     super();
     this.currentGame = currentGame;
