@@ -1,14 +1,14 @@
-import IntroView from '../views/intro-view.js';
-import GreetingView from '../views/greeting-view.js';
-import HeaderView from '../views/header-view.js';
-import RulesView from '../views/rules-view.js';
-import StatsView from '../views/stats-view.js';
-import GameScreen from './game-screen.js';
-import GameModel from '../model/game-model.js';
-import SplashScreen from '../views/splash-screen.js';
-import ModalErrorView from '../views/modal-error-view.js';
-import Utils from '../utils/utils.js';
-import GAME_DATA from '../data/game-data.js';
+import IntroView from "../views/intro-view.js";
+import GreetingView from "../views/greeting-view.js";
+import HeaderView from "../views/header-view.js";
+import RulesView from "../views/rules-view.js";
+import StatsView from "../views/stats-view.js";
+import GameScreen from "./game-screen.js";
+import GameModel from "../model/game-model.js";
+import SplashScreen from "../views/splash-screen.js";
+import ModalErrorView from "../views/modal-error-view.js";
+import Utils from "../utils/utils.js";
+import GAME_DATA from "../data/game-data.js";
 
 const screenContainer = document.createElement(`div`);
 
@@ -26,19 +26,20 @@ export default class Application {
     const splash = new SplashScreen();
     Utils.changeView(splash.element);
     splash.start();
-    window.fetch(`https://es.dump.academy/pixel-hunter/questions`).
-    then(checkStatus).
-    then((response) => response.json()).
-    then((data) => (serverData = data)).
-    then(() => Application.showIntro()).
-    catch((err) => {
-      Application.showModalError(err.message);
-      serverData = GAME_DATA;
-      setTimeout(() => {
-        Application.showIntro();
-      }, 3000);
-    }).
-    then(() => splash.stop());
+    window
+      .fetch(`https://vercel-json-server-m29.vercel.app/pixel_hunter_game_data`)
+      .then(checkStatus)
+      .then((response) => response.json())
+      .then((data) => (serverData = data))
+      .then(() => Application.showIntro())
+      .catch((err) => {
+        Application.showModalError(err.message);
+        serverData = GAME_DATA;
+        setTimeout(() => {
+          Application.showIntro();
+        }, 3000);
+      })
+      .then(() => splash.stop());
   }
 
   static showModalError(errorStatus) {
@@ -74,7 +75,11 @@ export default class Application {
 
   static showStats(isFail) {
     const header = new HeaderView();
-    const stats = new StatsView(this.model.currentGame, isFail, this.model.currentGame.statistics);
+    const stats = new StatsView(
+      this.model.currentGame,
+      isFail,
+      this.model.currentGame.statistics
+    );
 
     screenContainer.innerHTML = ``;
     screenContainer.appendChild(header.element);
