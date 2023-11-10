@@ -70,7 +70,9 @@ gulp.task(`copy-html`, () => {
 
 gulp.task(`copy`, [`copy-html`, `scripts`, `style`, `sprite`], () => {
   return gulp
-    .src([`fonts/**/*.{woff,woff2}`, `img/*.*`], { base: `.` })
+    .src([`fonts/**/*.{woff,woff2}`, `img/*.*`, `img/pics_for_questions/*.*`], {
+      base: `.`,
+    })
     .pipe(gulp.dest(`build`));
 });
 
