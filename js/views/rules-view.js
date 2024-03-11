@@ -1,11 +1,14 @@
-import AbstractView from './abstract-view.js';
-import Application from '../controller/application.js';
+import AbstractView from "./abstract-view.js";
+import Application from "../controller/application.js";
+import IMAGES_SOURCES from "../data/images-sources.js";
+import Utils from "../utils/utils.js";
 
 let playerName;
 
 export default class RulesView extends AbstractView {
   constructor() {
     super();
+    Utils.preloadImages(IMAGES_SOURCES);
   }
 
   get template() {
@@ -52,4 +55,3 @@ export default class RulesView extends AbstractView {
     });
   }
 }
-
